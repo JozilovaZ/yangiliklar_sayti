@@ -35,35 +35,7 @@
                             </p>
 
                         </div>
-                        <div class="comment-section">
-                            <h4>Foydalanuvchilar izohlar</h4>
-                            <div class="comments-list">
-                                {% for comment in comments %}
-                                    <div class="comment">
-                                        <strong>{{comment.user}}</strong>
-                                        <span class="text-meted">{{comment.created_at}}</span>
-                                         <p>
-                                        {{comment.comment }}
-                                        </p>
-                                </div>
-                                <hr>
-                                {% empty %}
-                                <p>Izohlar hozircha mavjud emas </p>
-                                {% endfor %}
-                            </div>
 
-                            <div class="comment-form mt-4">
-                        <h4 class="text-center">Izoh qoldirish</h4>
-                        <form method="POST" action="{% url 'batafsil' new.slug %}">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <textarea name="comment" class="form-control" rows="4" placeholder="Izoh qoldirish" required></textarea>
-                                <button type="submit" class="btn btn-primary">Yuborish</button>
-                            </div>
-                        </form>
-                    </div>
-                        </div>
-                        <h4 class="mb-4">Foydalanuvchilar izohi</h4>
 
 
                     </div>
