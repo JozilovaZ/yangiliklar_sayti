@@ -1,5 +1,9 @@
 from django.urls import path
-from .views import home_page,contact_page_view ,mahalliy_page_view,sport_page_view,xorij_page_view,texnologiya_page_view,seach_new_page,new_detail_page,addnew_view,add_category_view,add_news_with_tags,signup_view,login_view
+from .views import (home_page,contact_page_view ,mahalliy_page_view,sport_page_view,xorij_page_view,
+                    texnologiya_page_view,seach_new_page,new_detail_page,addnew_view,add_category_view,add_news_with_tags)
+
+
+
 
 
 urlpatterns=[
@@ -14,7 +18,6 @@ urlpatterns=[
     path("qoshish/",addnew_view,name='yangilik_qoshish'),
     path("categoriya/",add_category_view,name='kategoriy_add'),
     path('add-news/',add_news_with_tags, name='add_news_with_tags'),
-    path('register/', signup_view, name='royxatdan_otish'),
-    path('kirish/', login_view, name='login'),
+
 
 ]

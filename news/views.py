@@ -1,10 +1,15 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render,redirect
 from taggit.models import Tag
 from .models import Contact,Category,Comments,News
 import requests
 from  django.db.models import Q
-from .forms import AddNewsForm,AddCategoryForm,SignUpFOrm,LoginForm
+from .forms import AddNewsForm,AddCategoryForm
 from django.contrib.auth import login,logout
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
+
+
 
 
 def home_page(request):
@@ -28,54 +33,6 @@ def home_page(request):
     }
     return render(request,"index.html",context)
 
-#
-# def contact_page_view(request):
-#     if request.method=="POST":
-#         full_name=request.POST.get("full_name")
-#         email=request.POST.get("email")
-#         subject=request.POST.get("subject")
-#         message=request.POST.get("message")
-#         if not full_name or not email or not subject or not message:
-#             context={
-#                 "error":"Barcha maydonlarni to`ldiring"
-#             }
-#             return render(request,"contact.html",context)
-#
-#         Contact.objects.create(
-#             full_name=full_name,
-#             email=email,
-#             subject=subject,
-#             message=message
-#         )
-#         # telegram botga yuboramiz
-#         BOT_TOKEN='7606467914:AAFTiekYAkxZETRVgjHgBibly9nJSPSdGpY'
-#         chat_id='6548938418'
-#         text="Sizga yangi xabar bor \n"
-#         text+=f"Foydalanuvchi ismi {full_name}\n"
-#         text+=f"Email {email}\n"
-#         text+=f"Maqsad {subject}\n"
-#         text+=f"Xabar {message}\n"
-#
-#         url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-#         requests.post(url,data={"chat_id":chat_id, "text":text, "parse_mode":"HTML"})
-#         context = {
-#             "success": "Habaringiz muvoffiqiyatli yuborildi"
-#         }
-#         return render(request, "contact.html", context)
-#
-#
-#     return render(request,"contact.html")
-
-
-# #qidiruv qismi
-# def seach_new_page(request):
-#     query=request.GET.get('q')
-#     response=News.published.filter(Q(title__contains=query)+Q(body__icontains=query))
-#     context={
-#         "response":response
-#
-#     }
-#     return render(request,"searchnews.html",context)
 
 
 def seach_new_page(request):
@@ -210,38 +167,6 @@ def add_news_with_tags(request):
     }
     return render(request, "add_newsss.html", context)
 
-
-
-
-
-def signup_view(request):
-    if request.method=='POST':
-        form=SignUpFOrm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    else:
-        form=SignUpFOrm()
-    context={
-         "form":form
-    }
-
-    return render(request, context)
-
-
-def login_view(request):
-    if request.method=='POST':
-        form=LoginForm(request.POST)
-        if form.is_valid():
-            user=form.get_user()
-            login(request,user)
-            return redirect('bosh_sahifa')
-    else:
-        form=LoginForm()
-    context={
-        "form":form
-    }
-    return render(request,"login.html",context)
 
 
 def contact_page_view(request):
